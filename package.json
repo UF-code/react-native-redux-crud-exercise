@@ -4,7 +4,7 @@
   "main": "server.js",
   "type": "module",
   "repository": "https://github.com/UF-code/react-native-redux-crud-exercise.git",
-  "author": "UF-code <ugur.firat.education@gmail.com>",
+  "author": "UF-code <ugur.firat.developer@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "node backend/server",
