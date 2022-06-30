@@ -1,0 +1,8 @@
+{
+  "name": "react-native-redux-crud-exercise",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/UF-code/react-native-redux-crud-exercise.git",
+  "author": "UF-code <ugur.firat.education@gmail.com>",
+  "license": "MIT"
+}
