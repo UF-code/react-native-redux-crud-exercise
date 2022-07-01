@@ -28,7 +28,7 @@ export const AppNavigator = () => (
   <Tab.Navigator
     screenOptions={createScreenOptions}
     tabBarOptions={{
-      activeTintColor: 'tomato',
+      activeTintColor: '#47B5FF',
       inactiveTintColor: 'gray',
     }}
   >
