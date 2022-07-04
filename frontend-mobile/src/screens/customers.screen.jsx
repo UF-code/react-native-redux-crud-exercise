@@ -9,7 +9,7 @@ import { TableComponent } from '../components/table.component'
 import { AddModalComponent } from '../components/add.modal.component'
 
 // Styled Components
-import { AddButtonComponent } from '../styled-components/button.component'
+import { ButtonComponent } from '../styled-components/button.component'
 
 // Redux
 import { useDispatch } from 'react-redux'
@@ -33,7 +33,7 @@ export const CustomersScreen = () => {
     <View style={styles.container}>
       <TableComponent />
 
-      <AddButtonComponent
+      <ButtonComponent
         icon='account-plus'
         color='pink'
         mode='contained-tonal'
@@ -42,7 +42,7 @@ export const CustomersScreen = () => {
         }}
       >
         Add New Customer
-      </AddButtonComponent>
+      </ButtonComponent>
 
       <AddModalComponent show={show} onClose={() => setShow(false)} />
       <StatusBar style='auto' />

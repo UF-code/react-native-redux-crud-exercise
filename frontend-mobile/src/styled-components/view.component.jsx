@@ -22,3 +22,10 @@ export const ViewInfoComponent = styled.View`
   justify-content: space-evenly;
   // padding: 1%;
 `
+export const ViewButtonComponent = styled.View`
+  // background: red;
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

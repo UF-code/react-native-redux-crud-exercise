@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Modal, Portal, Text, Button, Provider, TextInput } from 'react-native-paper'
 
-import { ModalTextInputComponent } from '../styled-components/text.component'
+import { ModalComponent, ModalTextInputComponent } from '../styled-components/modal.component'
+import { ButtonComponent } from '../styled-components/button.component'
+import { ViewButtonComponent, ViewScreenComponent } from '../styled-components/view.component'
 
 // Redux
 // import { useDispatch } from 'react-redux'
@@ -60,31 +62,33 @@ export const AddModalComponent = (props) => {
         onChangeText={(email) => setUserEmail(email)}
       />
 
-      <Button
-        icon='account-check'
-        color='pink'
-        mode='contained-tonal'
-        onPress={() => {
-          // dispatch(addUser(user_template))
-          console.log(`${userFirst} ${userLast} ${userAge} ${userEmail}`)
-          props.onClose()
-          cleanUser()
-        }}
-      >
-        Add New User
-      </Button>
+      <ViewButtonComponent>
+        <ButtonComponent
+          icon='account-check'
+          color='pink'
+          mode='contained-tonal'
+          onPress={() => {
+            // dispatch(addUser(user_template))
+            console.log(`${userFirst} ${userLast} ${userAge} ${userEmail}`)
+            props.onClose()
+            cleanUser()
+          }}
+        >
+          Add New User
+        </ButtonComponent>
 
-      <Button
-        icon='account-remove'
-        color='pink'
-        mode='contained-tonal'
-        onPress={() => {
-          props.onClose()
-          cleanUser()
-        }}
-      >
-        Cancel
-      </Button>
+        <ButtonComponent
+          icon='account-remove'
+          color='pink'
+          mode='contained-tonal'
+          onPress={() => {
+            props.onClose()
+            cleanUser()
+          }}
+        >
+          Cancel
+        </ButtonComponent>
+      </ViewButtonComponent>
     </Modal>
   )
 }
