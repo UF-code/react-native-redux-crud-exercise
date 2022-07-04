@@ -7,22 +7,43 @@ import { Text, View, FlatList, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
 
 //
-import { ViewScreenComponent, ViewCardComponent } from '../styled-components/view.component'
+import {
+  ViewScreenComponent,
+  ViewCardComponent,
+  ViewInfoComponent,
+} from '../styled-components/view.component'
+import { TextComponent } from '../styled-components/text.component'
 
 export const TableComponent = () => {
   const customers = useSelector((state) => state.customers.customers)
 
   return (
-    <ViewScreenComponent>
-      <ScrollView>
+    <ScrollView>
+      <ViewScreenComponent>
         {customers.map((customer) => (
           <ViewCardComponent key={customer.id}>
-            <Text>{`${customer.first_name} ${customer.last_name}`}</Text>
-            <Text>{customer.email}</Text>
-            <Text>{customer.birthdate}</Text>
+            <ViewInfoComponent>
+              <TextComponent>FirstName: {`${customer.first_name.toUpperCase()}`}</TextComponent>
+              <TextComponent>LastName: {`${customer.last_name.toUpperCase()}`}</TextComponent>
+            </ViewInfoComponent>
+            <ViewInfoComponent>
+              <TextComponent>Email: {customer.email}</TextComponent>
+              <TextComponent>Birthdate: {customer.birthdate}</TextComponent>
+            </ViewInfoComponent>
+
+            <TextComponent>Created At</TextComponent>
+            <TextComponent>
+              Date: {customer.createdAt.split('T')[0]} Time:{' '}
+              {customer.createdAt.split('T')[1].split('.')[0]}
+            </TextComponent>
+            <TextComponent>Updated At</TextComponent>
+            <TextComponent>
+              Date: {customer.updatedAt.split('T')[0]} Time:{' '}
+              {customer.updatedAt.split('T')[1].split('.')[0]}
+            </TextComponent>
           </ViewCardComponent>
         ))}
-      </ScrollView>
-    </ViewScreenComponent>
+      </ViewScreenComponent>
+    </ScrollView>
   )
 }
