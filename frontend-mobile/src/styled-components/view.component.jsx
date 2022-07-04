@@ -20,5 +20,5 @@ export const ViewInfoComponent = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding: 5px;
+  // padding: 1%;
 `

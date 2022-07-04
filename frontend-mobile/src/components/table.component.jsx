@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { DataTable } from 'react-native-paper'
-import { Text, View, FlatList, ScrollView } from 'react-native'
+import { Text, View, FlatList, ScrollView, TouchableOpacity } from 'react-native'
 
 // Redux
 import { useSelector } from 'react-redux'
@@ -22,25 +22,34 @@ export const TableComponent = () => {
       <ViewScreenComponent>
         {customers.map((customer) => (
           <ViewCardComponent key={customer.id}>
-            <ViewInfoComponent>
-              <TextComponent>FirstName: {`${customer.first_name.toUpperCase()}`}</TextComponent>
-              <TextComponent>LastName: {`${customer.last_name.toUpperCase()}`}</TextComponent>
-            </ViewInfoComponent>
-            <ViewInfoComponent>
-              <TextComponent>Email: {customer.email}</TextComponent>
-              <TextComponent>Birthdate: {customer.birthdate}</TextComponent>
-            </ViewInfoComponent>
+            <TouchableOpacity
+              onPress={() => {
+                console.log(customer.id)
+              }}
+            >
+              <ViewInfoComponent>
+                <TextComponent>First Name: {`${customer.first_name.toUpperCase()}`}</TextComponent>
+                <TextComponent>Last Name: {`${customer.last_name.toUpperCase()}`}</TextComponent>
+              </ViewInfoComponent>
 
-            <TextComponent>Created At</TextComponent>
-            <TextComponent>
-              Date: {customer.createdAt.split('T')[0]} Time:{' '}
-              {customer.createdAt.split('T')[1].split('.')[0]}
-            </TextComponent>
-            <TextComponent>Updated At</TextComponent>
-            <TextComponent>
-              Date: {customer.updatedAt.split('T')[0]} Time:{' '}
-              {customer.updatedAt.split('T')[1].split('.')[0]}
-            </TextComponent>
+              <ViewInfoComponent>
+                <TextComponent>Email: {customer.email}</TextComponent>
+              </ViewInfoComponent>
+              <ViewInfoComponent>
+                <TextComponent>Birthdate: {customer.birthdate}</TextComponent>
+              </ViewInfoComponent>
+
+              <TextComponent>Created At</TextComponent>
+              <TextComponent>
+                Date: {customer.createdAt.split('T')[0]} Time:{' '}
+                {customer.createdAt.split('T')[1].split('.')[0]}
+              </TextComponent>
+              <TextComponent>Updated At</TextComponent>
+              <TextComponent>
+                Date: {customer.updatedAt.split('T')[0]} Time:{' '}
+                {customer.updatedAt.split('T')[1].split('.')[0]}
+              </TextComponent>
+            </TouchableOpacity>
           </ViewCardComponent>
         ))}
       </ViewScreenComponent>
