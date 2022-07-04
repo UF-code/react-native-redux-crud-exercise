@@ -1,10 +1,14 @@
 import React from 'react'
 
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { Button } from 'react-native-paper'
 
 // Components
 import { TableComponent } from '../components/table.component'
+
+// Styled Components
+import { AddButtonComponent } from '../styled-components/button.component'
 
 // Redux
 import { useDispatch } from 'react-redux'
@@ -27,6 +31,16 @@ export const CustomersScreen = () => {
     <View style={styles.container}>
       <TableComponent />
 
+      <AddButtonComponent
+        icon='account-plus'
+        color='pink'
+        mode='contained-tonal'
+        onPress={() => {
+          console.log('first')
+        }}
+      >
+        Add New Customer
+      </AddButtonComponent>
       <StatusBar style='auto' />
     </View>
   )

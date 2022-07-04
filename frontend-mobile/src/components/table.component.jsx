@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { DataTable } from 'react-native-paper'
-import { Text, View, FlatList, ScrollView, TouchableOpacity } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 
 // Redux
 import { useSelector } from 'react-redux'
@@ -24,7 +23,9 @@ export const TableComponent = () => {
           <ViewCardComponent key={customer.id}>
             <TouchableOpacity
               onPress={() => {
-                console.log(customer.id)
+                console.log(
+                  `ID: ${customer.id} User: ${customer.first_name} ${customer.last_name} is clicked!`
+                )
               }}
             >
               <ViewInfoComponent>
