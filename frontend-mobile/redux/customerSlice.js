@@ -13,10 +13,14 @@ export const customerSlice = createSlice({
       state.customers = [...action.payload]
     },
     editCustomers: (state, action) => {
-      state.customers.find((customer) => customer.id === action.payload.id).first_name = action.payload.first_name
-      state.customers.find((customer) => customer.id === action.payload.id).last_name = action.payload.last_name
-      state.customers.find((customer) => customer.id === action.payload.id).email = action.payload.email
-      state.customers.find((customer) => customer.id === action.payload.id).birthdate = action.payload.birthdate
+      state.customers.find((customer) => customer.id === action.payload.id).first_name =
+        action.payload.first_name
+      state.customers.find((customer) => customer.id === action.payload.id).last_name =
+        action.payload.last_name
+      state.customers.find((customer) => customer.id === action.payload.id).email =
+        action.payload.email
+      state.customers.find((customer) => customer.id === action.payload.id).birthdate =
+        action.payload.birthdate
 
       state.customers = [...state.customers]
     },
@@ -26,6 +30,6 @@ export const customerSlice = createSlice({
   },
 })
 
-export const { addCustomer, getCustomers, editCustomers, deleteCustomer } = customerSlice.actions
+export const { addCustomers, getCustomers, editCustomers, deleteCustomer } = customerSlice.actions
 
 export default customerSlice.reducer

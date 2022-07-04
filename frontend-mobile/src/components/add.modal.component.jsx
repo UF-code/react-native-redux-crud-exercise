@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Portal, Text, Button, Provider, TextInput } from 'react-native-paper'
 
-import { Button as But } from 'react-native'
-import DatePicker from 'react-native-datepicker'
-
 import { ModalComponent, ModalTextInputComponent } from '../styled-components/modal.component'
 import { ButtonComponent } from '../styled-components/button.component'
 import { ViewButtonComponent, ViewScreenComponent } from '../styled-components/view.component'
@@ -13,7 +10,7 @@ import axios from '../../axios/axios'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import { addCustomer } from '../../redux/customerSlice'
+import { addCustomers } from '../../redux/customerSlice'
 
 export const AddModalComponent = (props) => {
   const dispatch = useDispatch()
@@ -44,10 +41,10 @@ export const AddModalComponent = (props) => {
         first_name: customerFirst,
         last_name: customerLast,
         email: customerEmail,
-        birthdate: customerBirthDate,
+        birthdate: new Date(customerBirthDate),
       })
       .then((response) => {
-        dispatch(addCustomer(response.data))
+        dispatch(addCustomers(response.data))
         cleanCustomer()
       })
       .catch((error) => {
@@ -81,32 +78,13 @@ export const AddModalComponent = (props) => {
         value={customerEmail}
         onChangeText={handleEmailChange}
       />
-
-      {/* <DatePicker date={date} onDateChange={setDate} /> */}
-
-      <DatePicker
-        style={{ width: 200 }}
-        date={dated}
-        mode='date'
-        placeholder='select date'
-        format='YYYY-MM-DD'
-        minDate='2016-05-01'
-        maxDate='2016-06-01'
-        confirmBtnText='Confirm'
-        cancelBtnText='Cancel'
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0,
-          },
-          dateInput: {
-            marginLeft: 36,
-          },
-          // ... You can check the source to find the other keys.
-        }}
-        onDateChange={setDated(dated)}
+      <ModalTextInputComponent
+        label='Birthdate'
+        mode='outlined'
+        outlineColor='pink'
+        activeOutlineColor='pink'
+        value={customerBirthDate}
+        onChangeText={handleBirthChange}
       />
 
       <ViewButtonComponent>
@@ -115,7 +93,9 @@ export const AddModalComponent = (props) => {
           color='pink'
           mode='contained-tonal'
           onPress={() => {
-            console.log(`${customerFirst} ${customerLast} ${customerBirthDate} ${customerEmail}`)
+            console.log(
+              `${customerFirst} ${customerLast} ${new Date(customerBirthDate)} ${customerEmail}`
+            )
             addNewCustomer()
             props.onClose()
             cleanCustomer()
