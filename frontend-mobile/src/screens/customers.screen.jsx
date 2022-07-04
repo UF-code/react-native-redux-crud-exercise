@@ -35,7 +35,7 @@ export const CustomersScreen = () => {
       <TableComponent />
 
       <ButtonComponent
-        disabled={disable}
+        // disabled={disable}
         icon='account-plus'
         color='pink'
         mode='contained-tonal'
