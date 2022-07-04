@@ -12,7 +12,7 @@ export const ViewCardComponent = styled.View`
   border-radius: 20px;
   background-color: pink;
   padding: 5%;
-  margin: 3% 3% 3% 3%;
+  margin: 3% 4% 3% 4%;
 `
 
 export const ViewInfoComponent = styled.View`

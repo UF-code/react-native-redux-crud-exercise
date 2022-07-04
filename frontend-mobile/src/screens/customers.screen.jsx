@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
@@ -6,6 +6,7 @@ import { Button } from 'react-native-paper'
 
 // Components
 import { TableComponent } from '../components/table.component'
+import { AddModalComponent } from '../components/add.modal.component'
 
 // Styled Components
 import { AddButtonComponent } from '../styled-components/button.component'
@@ -19,6 +20,7 @@ import axios from '../../axios/axios'
 
 export const CustomersScreen = () => {
   const dispatch = useDispatch()
+  const [show, setShow] = useState(false)
 
   axios
     .get('/getAllCustomers')
@@ -36,11 +38,13 @@ export const CustomersScreen = () => {
         color='pink'
         mode='contained-tonal'
         onPress={() => {
-          console.log('first')
+          setShow(true)
         }}
       >
         Add New Customer
       </AddButtonComponent>
+
+      <AddModalComponent show={show} onClose={() => setShow(false)} />
       <StatusBar style='auto' />
     </View>
   )
