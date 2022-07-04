@@ -21,6 +21,7 @@ import axios from '../../axios/axios'
 export const CustomersScreen = () => {
   const dispatch = useDispatch()
   const [show, setShow] = useState(false)
+  const [disable, setDisable] = useState(true)
 
   axios
     .get('/getAllCustomers')
@@ -34,6 +35,7 @@ export const CustomersScreen = () => {
       <TableComponent />
 
       <ButtonComponent
+        disabled={disable}
         icon='account-plus'
         color='pink'
         mode='contained-tonal'
