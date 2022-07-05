@@ -15,16 +15,21 @@ export const EditModalComponent = (props) => {
   // const users = useSelector((state) => state.users.users)
   const containerStyle = { backgroundColor: 'white', padding: 20 }
 
-  const [userFirst, setUserFirst] = useState('')
-  const [userLast, setUserLast] = useState('')
-  const [userAge, setUserAge] = useState('')
-  const [userEmail, setUserEmail] = useState('')
+  const [customerFirst, setCustomerFirst] = useState('')
+  const [customerLast, setCustomerLast] = useState('')
+  const [customerBirthDate, setCustomerBirthDate] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
 
-  const cleanUser = () => {
-    setUserFirst('')
-    setUserLast('')
-    setUserAge('')
-    setUserEmail('')
+  const handleNameChange = (value) => setCustomerFirst(value)
+  const handleLastChange = (value) => setCustomerLast(value)
+  const handleEmailChange = (value) => setCustomerEmail(value)
+  const handleBirthChange = (value) => setCustomerBirthDate(value)
+
+  const cleanCustomer = () => {
+    setCustomerFirst('')
+    setCustomerLast('')
+    setCustomerEmail('')
+    setCustomerBirthDate('')
   }
 
   return (
@@ -34,32 +39,32 @@ export const EditModalComponent = (props) => {
         mode='outlined'
         outlineColor='pink'
         activeOutlineColor='pink'
-        value={userFirst}
-        onChangeText={(first) => setUserFirst(first)}
+        value={customerFirst}
+        onChangeText={handleNameChange}
       />
       <ModalTextInputComponent
         label='Last Name'
         mode='outlined'
         outlineColor='pink'
         activeOutlineColor='pink'
-        value={userLast}
-        onChangeText={(last) => setUserLast(last)}
-      />
-      <ModalTextInputComponent
-        label='Age'
-        mode='outlined'
-        outlineColor='pink'
-        activeOutlineColor='pink'
-        value={userAge}
-        onChangeText={(age) => setUserAge(age)}
+        value={customerLast}
+        onChangeText={handleLastChange}
       />
       <ModalTextInputComponent
         label='Email'
         mode='outlined'
         outlineColor='pink'
         activeOutlineColor='pink'
-        value={userEmail}
-        onChangeText={(email) => setUserEmail(email)}
+        value={customerEmail}
+        onChangeText={handleEmailChange}
+      />
+      <ModalTextInputComponent
+        label='Birthdate'
+        mode='outlined'
+        outlineColor='pink'
+        activeOutlineColor='pink'
+        value={customerBirthDate}
+        onChangeText={handleBirthChange}
       />
 
       <ViewButtonComponent>
@@ -69,9 +74,9 @@ export const EditModalComponent = (props) => {
           mode='contained-tonal'
           onPress={() => {
             // dispatch(addUser(user_template))
-            console.log(`${userFirst} ${userLast} ${userAge} ${userEmail}`)
+            console.log(`${customerFirst} ${customerLast} ${customerAge} ${customerEmail}`)
             props.onClose()
-            cleanUser()
+            cleanCustomer()
           }}
         >
           Edit User
@@ -83,7 +88,7 @@ export const EditModalComponent = (props) => {
           mode='contained-tonal'
           onPress={() => {
             props.onClose()
-            cleanUser()
+            cleanCustomer()
           }}
         >
           Cancel
