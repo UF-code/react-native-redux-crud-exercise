@@ -7,7 +7,7 @@ import { ViewButtonComponent } from '../styled-components/view.component'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import { editCustomers } from '../../redux/customerSlice'
+import { editCustomers, deleteCustomer } from '../../redux/customerSlice'
 
 //
 import axios from '../../axios/axios'
@@ -53,6 +53,18 @@ export const EditModalComponent = (props) => {
             birthdate: customerBirthDate,
           })
         )
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  const deleteThatCustomer = (id) => {
+    axios
+      .delete(`/deleteCustomer/${id}`)
+      .then((response) => {
+        dispatch(deleteCustomer(id))
+        console.log(response)
       })
       .catch((error) => {
         console.log(error)
@@ -112,7 +124,20 @@ export const EditModalComponent = (props) => {
             cleanCustomer()
           }}
         >
-          Edit User {props.data.id}
+          Edit Customer {props.data.id}
+        </ButtonComponent>
+
+        <ButtonComponent
+          icon='account-remove'
+          color='pink'
+          mode='contained-tonal'
+          onPress={() => {
+            deleteThatCustomer(customerID)
+            props.onClose()
+            cleanCustomer()
+          }}
+        >
+          Delete Customer {props.data.id}
         </ButtonComponent>
 
         <ButtonComponent
