@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Modal, TextInput } from 'react-native-paper'
+import { TextInput } from 'react-native-paper'
 
 export const ModalTextInputComponent = styled(TextInput)`
   background-color: white;
