@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { ScrollView, TouchableOpacity } from 'react-native'
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux'
-import { addTmpCustomer } from '../../redux/customerSlice'
+import { useSelector } from 'react-redux'
 
 // Components
 import { EditModalComponent } from './edit.modal.component'
