@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { ScrollView, TouchableOpacity } from 'react-native'
 
 // Redux
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addTmpCustomer } from '../../redux/customerSlice'
 
 // Components
 import { EditModalComponent } from './edit.modal.component'
@@ -17,9 +18,11 @@ import {
 import { TextComponent } from '../styled-components/text.component'
 
 export const TableComponent = (props) => {
+  const dispatch = useDispatch()
   const customers = useSelector((state) => state.customers.customers)
+  // const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
   const [show, setShow] = useState(false)
-  const [modalData, setModalData] = useState(null)
+  // const [modalData, setModalData] = useState(null)
 
   return (
     <>
@@ -34,8 +37,9 @@ export const TableComponent = (props) => {
                     `ID: ${customer.id} User: ${customer.first_name} ${customer.last_name} is clicked!`
                   )
                   setShow(true)
-                  setModalData(customer)
-                  console.log(modalData)
+
+                  dispatch(addTmpCustomer(customer))
+                  // console.log(customer)
                 }}
               >
                 <ViewInfoComponent>
@@ -67,16 +71,14 @@ export const TableComponent = (props) => {
           ))}
         </ViewScreenComponent>
       </ScrollView>
-      {modalData && (
-        <EditModalComponent
-          data={modalData}
-          show={show}
-          onClose={() => {
-            setShow(false)
-            props.enableButton()
-          }}
-        />
-      )}
+
+      <EditModalComponent
+        show={show}
+        onClose={() => {
+          setShow(false)
+          props.enableButton()
+        }}
+      />
     </>
   )
 }

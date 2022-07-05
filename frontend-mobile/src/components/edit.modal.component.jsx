@@ -6,19 +6,19 @@ import { ButtonComponent } from '../styled-components/button.component'
 import { ViewButtonComponent, ViewScreenComponent } from '../styled-components/view.component'
 
 // Redux
-// import { useDispatch } from 'react-redux'
-// import { addUser } from '../../redux/usersSlice'
-// import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+// import { addTmpCustomer } from '../../redux/customerSlice'
 
 export const EditModalComponent = (props) => {
-  // const dispatch = useDispatch()
-  // const users = useSelector((state) => state.users.users)
+  const dispatch = useDispatch()
+  const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
   const containerStyle = { backgroundColor: 'white', padding: 20 }
 
-  const [customerFirst, setCustomerFirst] = useState(props.data.first_name)
-  const [customerLast, setCustomerLast] = useState(props.data.last_name)
-  const [customerBirthDate, setCustomerBirthDate] = useState(props.data.birthdate)
-  const [customerEmail, setCustomerEmail] = useState(props.data.email)
+  // console.log(tmpCustomer)
+  const [customerFirst, setCustomerFirst] = useState(tmpCustomer.first_name)
+  const [customerLast, setCustomerLast] = useState('')
+  const [customerBirthDate, setCustomerBirthDate] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
 
   const handleNameChange = (value) => setCustomerFirst(value)
   const handleLastChange = (value) => setCustomerLast(value)
@@ -33,7 +33,14 @@ export const EditModalComponent = (props) => {
   }
 
   return (
-    <Modal visible={props.show} onDismiss={props.onClose} contentContainerStyle={containerStyle}>
+    <Modal
+      visible={props.show}
+      onDismiss={() => {
+        props.onClose()
+        cleanCustomer()
+      }}
+      contentContainerStyle={containerStyle}
+    >
       <ModalTextInputComponent
         label='First Name'
         mode='outlined'
@@ -76,7 +83,7 @@ export const EditModalComponent = (props) => {
             // dispatch(addUser(user_template))
             console.log(`${customerFirst} ${customerLast} ${customerBirthDate} ${customerEmail}`)
             props.onClose()
-            // cleanCustomer()
+            cleanCustomer()
           }}
         >
           Edit User
@@ -88,7 +95,7 @@ export const EditModalComponent = (props) => {
           mode='contained-tonal'
           onPress={() => {
             props.onClose()
-            // cleanCustomer()
+            cleanCustomer()
           }}
         >
           Cancel
