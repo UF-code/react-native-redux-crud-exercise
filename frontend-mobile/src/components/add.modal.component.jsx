@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Modal, Portal, Text, Button, Provider, TextInput } from 'react-native-paper'
+import { Modal } from 'react-native-paper'
 
-import { ModalComponent, ModalTextInputComponent } from '../styled-components/modal.component'
+import { ModalTextInputComponent } from '../styled-components/modal.component'
 import { ButtonComponent } from '../styled-components/button.component'
-import { ViewButtonComponent, ViewScreenComponent } from '../styled-components/view.component'
+import { ViewButtonComponent } from '../styled-components/view.component'
 
 // Axios
 import axios from '../../axios/axios'
@@ -15,8 +15,6 @@ import { addCustomers } from '../../redux/customerSlice'
 export const AddModalComponent = (props) => {
   const dispatch = useDispatch()
   const containerStyle = { backgroundColor: 'white', padding: 20 }
-
-  const [dated, setDated] = useState(new Date())
 
   const [customerFirst, setCustomerFirst] = useState('')
   const [customerLast, setCustomerLast] = useState('')
