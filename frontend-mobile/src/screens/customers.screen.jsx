@@ -21,7 +21,7 @@ import axios from '../../axios/axios'
 export const CustomersScreen = () => {
   const dispatch = useDispatch()
   const [show, setShow] = useState(false)
-  const [disable, setDisable] = useState(true)
+  const [disable, setDisable] = useState(false)
 
   axios
     .get('/getAllCustomers')
@@ -32,10 +32,17 @@ export const CustomersScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TableComponent />
+      <TableComponent
+        disableButton={() => {
+          setDisable(true)
+        }}
+        enableButton={() => {
+          setDisable(false)
+        }}
+      />
 
       <ButtonComponent
-        // disabled={disable}
+        disabled={disable}
         icon='account-plus'
         color='pink'
         mode='contained-tonal'

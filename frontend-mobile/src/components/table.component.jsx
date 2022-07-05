@@ -16,7 +16,7 @@ import {
 } from '../styled-components/view.component'
 import { TextComponent } from '../styled-components/text.component'
 
-export const TableComponent = () => {
+export const TableComponent = (props) => {
   const customers = useSelector((state) => state.customers.customers)
   const [show, setShow] = useState(false)
 
@@ -32,6 +32,7 @@ export const TableComponent = () => {
                     `ID: ${customer.id} User: ${customer.first_name} ${customer.last_name} is clicked!`
                   )
                   setShow(true)
+                  props.disableButton()
                 }}
               >
                 <ViewInfoComponent>
@@ -63,7 +64,13 @@ export const TableComponent = () => {
           ))}
         </ViewScreenComponent>
       </ScrollView>
-      <EditModalComponent show={show} onClose={() => setShow(false)} />
+      <EditModalComponent
+        show={show}
+        onClose={() => {
+          setShow(false)
+          props.enableButton()
+        }}
+      />
     </>
   )
 }
