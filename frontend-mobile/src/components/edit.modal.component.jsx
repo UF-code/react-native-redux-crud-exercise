@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper'
+import { Modal } from 'react-native-paper'
 
-import { TextInput, StyleSheet } from 'react-native'
-
-import { ModalComponent, ModalTextInputComponent } from '../styled-components/modal.component'
+import { ModalTextInputComponent } from '../styled-components/modal.component'
 import { ButtonComponent } from '../styled-components/button.component'
-import { ViewButtonComponent, ViewScreenComponent } from '../styled-components/view.component'
+import { ViewButtonComponent } from '../styled-components/view.component'
 
 // Redux
-// import { useSelector, useDispatch } from 'react-redux'
-// import { addTmpCustomer } from '../../redux/customerSlice'
+import { useDispatch } from 'react-redux'
+import { editCustomers } from '../../redux/customerSlice'
+
+//
+import axios from '../../axios/axios'
 
 export const EditModalComponent = (props) => {
+  const dispatch = useDispatch()
   const containerStyle = { backgroundColor: 'white', padding: 20 }
 
-  // console.log(tmpCustomer)
+  const customerID = props.data.id
   const [customerFirst, setCustomerFirst] = useState(props.data.first_name)
   const [customerLast, setCustomerLast] = useState(props.data.last_name)
   const [customerBirthDate, setCustomerBirthDate] = useState(props.data.birthdate)
@@ -30,7 +32,31 @@ export const EditModalComponent = (props) => {
     setCustomerLast('')
     setCustomerEmail('')
     setCustomerBirthDate('')
-    // console.log('hey')
+  }
+
+  const editCurrentCustomer = () => {
+    axios
+      .put(`/updateCustomer/${customerID}`, {
+        first_name: customerFirst,
+        last_name: customerLast,
+        email: customerEmail,
+        birthdate: customerBirthDate,
+      })
+      .then((response) => {
+        console.log(response)
+        dispatch(
+          editCustomers({
+            id: customerID,
+            first_name: customerFirst,
+            last_name: customerLast,
+            email: customerEmail,
+            birthdate: customerBirthDate,
+          })
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
@@ -81,13 +107,12 @@ export const EditModalComponent = (props) => {
           color='pink'
           mode='contained-tonal'
           onPress={() => {
-            // dispatch(addUser(user_template))
-            console.log(`${customerFirst} ${customerLast} ${customerBirthDate} ${customerEmail}`)
+            editCurrentCustomer()
             props.onClose()
             cleanCustomer()
           }}
         >
-          Edit User {props.cst_id}
+          Edit User {props.data.id}
         </ButtonComponent>
 
         <ButtonComponent
@@ -105,12 +130,3 @@ export const EditModalComponent = (props) => {
     </Modal>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-})
