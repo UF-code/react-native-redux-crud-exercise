@@ -19,6 +19,7 @@ import { TextComponent } from '../styled-components/text.component'
 export const TableComponent = (props) => {
   const customers = useSelector((state) => state.customers.customers)
   const [show, setShow] = useState(false)
+  const [modalData, setModalData] = useState(null)
 
   return (
     <>
@@ -28,11 +29,13 @@ export const TableComponent = (props) => {
             <ViewCardComponent key={customer.id}>
               <TouchableOpacity
                 onPress={() => {
+                  props.disableButton()
                   console.log(
                     `ID: ${customer.id} User: ${customer.first_name} ${customer.last_name} is clicked!`
                   )
                   setShow(true)
-                  props.disableButton()
+                  setModalData(customer)
+                  console.log(modalData)
                 }}
               >
                 <ViewInfoComponent>
@@ -64,13 +67,16 @@ export const TableComponent = (props) => {
           ))}
         </ViewScreenComponent>
       </ScrollView>
-      <EditModalComponent
-        show={show}
-        onClose={() => {
-          setShow(false)
-          props.enableButton()
-        }}
-      />
+      {modalData && (
+        <EditModalComponent
+          data={modalData}
+          show={show}
+          onClose={() => {
+            setShow(false)
+            props.enableButton()
+          }}
+        />
+      )}
     </>
   )
 }
