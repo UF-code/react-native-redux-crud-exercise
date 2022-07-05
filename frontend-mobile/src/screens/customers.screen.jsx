@@ -40,18 +40,19 @@ export const CustomersScreen = () => {
           setDisable(false)
         }}
       />
-
-      <ButtonComponent
-        disabled={disable}
-        icon='account-plus'
-        color='pink'
-        mode='contained-tonal'
-        onPress={() => {
-          setShow(true)
-        }}
-      >
-        Add New Customer
-      </ButtonComponent>
+      {!disable && (
+        <ButtonComponent
+          disabled={disable}
+          icon='account-plus'
+          color='pink'
+          mode='contained-tonal'
+          onPress={() => {
+            setShow(true)
+          }}
+        >
+          Add New Customer
+        </ButtonComponent>
+      )}
 
       <AddModalComponent show={show} onClose={() => setShow(false)} />
       <StatusBar style='auto' />

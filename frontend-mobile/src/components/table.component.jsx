@@ -18,11 +18,11 @@ import {
 import { TextComponent } from '../styled-components/text.component'
 
 export const TableComponent = (props) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const customers = useSelector((state) => state.customers.customers)
   // const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
   const [show, setShow] = useState(false)
-  // const [modalData, setModalData] = useState(null)
+  const [modalData, setModalData] = useState(null)
 
   return (
     <>
@@ -38,7 +38,7 @@ export const TableComponent = (props) => {
                   )
                   setShow(true)
 
-                  dispatch(addTmpCustomer(customer))
+                  setModalData(customer)
                   // console.log(customer)
                 }}
               >
@@ -72,13 +72,16 @@ export const TableComponent = (props) => {
         </ViewScreenComponent>
       </ScrollView>
 
-      <EditModalComponent
-        show={show}
-        onClose={() => {
-          setShow(false)
-          props.enableButton()
-        }}
-      />
+      {modalData && (
+        <EditModalComponent
+          data={modalData}
+          show={show}
+          onClose={() => {
+            setShow(false)
+            props.enableButton()
+          }}
+        />
+      )}
     </>
   )
 }

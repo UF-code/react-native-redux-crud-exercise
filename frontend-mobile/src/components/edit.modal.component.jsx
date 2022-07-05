@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
-import { Modal, Portal, Text, Button, Provider, TextInput } from 'react-native-paper'
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper'
+
+import { TextInput, StyleSheet } from 'react-native'
 
 import { ModalComponent, ModalTextInputComponent } from '../styled-components/modal.component'
 import { ButtonComponent } from '../styled-components/button.component'
 import { ViewButtonComponent, ViewScreenComponent } from '../styled-components/view.component'
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 // import { addTmpCustomer } from '../../redux/customerSlice'
 
 export const EditModalComponent = (props) => {
-  const dispatch = useDispatch()
-  const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
   const containerStyle = { backgroundColor: 'white', padding: 20 }
 
   // console.log(tmpCustomer)
-  const [customerFirst, setCustomerFirst] = useState(tmpCustomer.first_name)
-  const [customerLast, setCustomerLast] = useState('')
-  const [customerBirthDate, setCustomerBirthDate] = useState('')
-  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerFirst, setCustomerFirst] = useState(props.data.first_name)
+  const [customerLast, setCustomerLast] = useState(props.data.last_name)
+  const [customerBirthDate, setCustomerBirthDate] = useState(props.data.birthdate)
+  const [customerEmail, setCustomerEmail] = useState(props.data.email)
 
   const handleNameChange = (value) => setCustomerFirst(value)
   const handleLastChange = (value) => setCustomerLast(value)
@@ -30,6 +30,7 @@ export const EditModalComponent = (props) => {
     setCustomerLast('')
     setCustomerEmail('')
     setCustomerBirthDate('')
+    // console.log('hey')
   }
 
   return (
@@ -42,11 +43,11 @@ export const EditModalComponent = (props) => {
       contentContainerStyle={containerStyle}
     >
       <ModalTextInputComponent
-        label='First Name'
+        label={'First Name'}
         mode='outlined'
         outlineColor='pink'
         activeOutlineColor='pink'
-        value={customerFirst}
+        defaultValue={customerFirst}
         onChangeText={handleNameChange}
       />
       <ModalTextInputComponent
@@ -86,7 +87,7 @@ export const EditModalComponent = (props) => {
             cleanCustomer()
           }}
         >
-          Edit User
+          Edit User {props.cst_id}
         </ButtonComponent>
 
         <ButtonComponent
@@ -104,3 +105,12 @@ export const EditModalComponent = (props) => {
     </Modal>
   )
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+})
